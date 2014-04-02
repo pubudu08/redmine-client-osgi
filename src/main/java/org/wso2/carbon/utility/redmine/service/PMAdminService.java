@@ -33,14 +33,15 @@ public class PMAdminService implements IProjectManagement{
     /**
      * This method will create a project which is related to PM
      * @param pmHost the host name to create a project
-     * @param apiKey API key
+     * @param username username
+     * @param password password
      * @param projectName  project name
      * @return  <code>true</code> if project created successfully
      */
     @Override
-    public boolean createPMSProject(String redmineHost, String apiKey, String projectName) {
+    public boolean createPMSProject(String redmineHost, String username,String password,  String projectName) {
 
-        mgr=  new RedmineManager(redmineHost, apiKey);
+        mgr=  new RedmineManager(redmineHost,username,password);
         Project project=null;
         try {
             logger.info(mgr.getCurrentUser());
@@ -51,7 +52,7 @@ public class PMAdminService implements IProjectManagement{
             project.setCreatedOn(new Date());
             project.setIdentifier(projectName);
             mgr.createProject(project);
-            return isPMSProjectExist(redmineHost,apiKey,projectName);
+            return isPMSProjectExist(redmineHost,username,password,projectName);
 
         } catch (RedmineException e) {
             e.printStackTrace();
@@ -62,13 +63,14 @@ public class PMAdminService implements IProjectManagement{
     /**
      * check whether project is exists or not
      * @param pmHost   Host name of the API
-     * @param apiKey   Basic API key
+     * @param username username
+     * @param password password
      * @param projectName  name of the project to search
      * @return  <code>true</code> if project already exists
      */
     @Override
-    public boolean isPMSProjectExist(String redmineHost, String apiKey, String projectName) {
-        mgr = new RedmineManager(redmineHost,apiKey);
+    public boolean isPMSProjectExist(String redmineHost, String username,String password, String projectName) {
+        mgr = new RedmineManager(redmineHost,username,password);
         try {
             logger.info(mgr.getCurrentUser());
             List<Project> projects = mgr.getProjects();
@@ -87,12 +89,13 @@ public class PMAdminService implements IProjectManagement{
     /**
      * get project by its Id
      * @param redmineHost
-     * @param apiKey
+     * @param username username
+     * @param password password
      * @param projectkey
      * @return Redmine Project
      */
-    public Project getProjectById(String redmineHost, String apiKey, String projectkey){
-        mgr= new RedmineManager(redmineHost,apiKey);
+    public Project getProjectById(String redmineHost, String username,String password, String projectkey){
+        mgr= new RedmineManager(redmineHost,username,password);
         Project project = null;
         try {
             project = mgr.getProjectByKey(projectkey);
@@ -107,11 +110,12 @@ public class PMAdminService implements IProjectManagement{
     /**
      * get the current logged user
      * @param redmineHost
-     * @param apiKey
+     * @param username username
+     * @param password password
      * @return User type object
      */
-    public User getCurrentUser(String redmineHost, String apiKey){
-        mgr = new RedmineManager(redmineHost,apiKey);
+    public User getCurrentUser(String redmineHost, String username,String password ){
+        mgr = new RedmineManager(redmineHost,username,password);
         User user = null;
         try {
             user = mgr.getCurrentUser();
@@ -125,12 +129,13 @@ public class PMAdminService implements IProjectManagement{
     /**
      * Get list of projects
      * @param redmineHost
-     * @param apiKey
+     * @param username username
+     * @param password password
      * @param projectKey
      * @return Array list of projects
      */
-    public List<Version> getProjectVersions(String redmineHost, String apiKey,String projectKey){
-        mgr = new RedmineManager(redmineHost,apiKey);
+    public List<Version> getProjectVersions(String redmineHost, String username,String password, String projectKey){
+        mgr = new RedmineManager(redmineHost,username,password);
         List<Version> projectVersions = null;
 
         try {

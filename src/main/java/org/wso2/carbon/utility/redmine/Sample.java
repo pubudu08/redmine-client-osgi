@@ -10,7 +10,8 @@ import org.wso2.carbon.utility.redmine.service.PMAdminService;
 public class Sample {
 
     public static String redmineHost = "https://redmine.wso2.com/";
-    public static String apiAccessKey = "cd1a2076f7d7a155a0e13e2b05553ac26e27eeb7";
+    public static String usename = "pubudud@wso2.com";
+    public static String password = "<password>";
 
 
     public static void main(String[] args) {
@@ -20,12 +21,12 @@ public class Sample {
 
 
         System.out.println("" +
-                "Is Carbon Kernel exist ? : " + pmAdminService.isPMSProjectExist(redmineHost, apiAccessKey, "Jaggery") + "\n" +
-                pmAdminService.getCurrentUser(redmineHost,apiAccessKey) + "\n" +
-                pmAdminService.getProjectById(redmineHost,apiAccessKey,"18") + "\n" +
-                "Parent of Carbon kernel is "+pmAdminService.getProjectById(redmineHost,apiAccessKey,pmAdminService.getProjectById(redmineHost,apiAccessKey,"13").getParentId().toString()) + "\n" +
-                pmAdminService.getProjectById(redmineHost,apiAccessKey,"13").getIdentifier() + "\n" +
-                pmAdminService.getProjectVersions(redmineHost,apiAccessKey,"13") + "\n"
+                "Is Carbon Kernel exist ? : " + pmAdminService.isPMSProjectExist(redmineHost, usename,password, "Jaggery") + "\n" +
+                pmAdminService.getCurrentUser(redmineHost, usename,password) + "\n" +
+                pmAdminService.getProjectById(redmineHost, usename,password,"18") + "\n" +
+                "Parent of Carbon kernel is "+pmAdminService.getProjectById(redmineHost, usename,password,pmAdminService.getProjectById(redmineHost, usename,password,"13").getParentId().toString()) + "\n" +
+                pmAdminService.getProjectById(redmineHost, usename,password,"13").getIdentifier() + "\n" +
+                pmAdminService.getProjectVersions(redmineHost, usename,password,"13") + "\n"
         );
 
        //System.out.println(pmAdminService.createPMSProject(null, null, "Hello World"));
