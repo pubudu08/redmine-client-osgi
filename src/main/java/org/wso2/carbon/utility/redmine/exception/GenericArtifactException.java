@@ -8,17 +8,27 @@ public class GenericArtifactException extends Exception {
 
 	private String errorCode = "Unknown_Exception";
 
+
 	/**
 	 * Constructor of GenericArtifactException
 	 *
 	 * @param message
 	 * @param errorCode
 	 */
-	public GenericArtifactException(String message, String errorCode,Exception exception) {
+	public GenericArtifactException(String message, String errorCode) {
 		super(message);
 		this.errorCode = errorCode;
 	}
 
+	/**
+	 * @param message
+	 * @param cause
+	 * @param errorCode
+	 */
+	public GenericArtifactException(String message, Throwable cause, String errorCode) {
+		super(message, cause);
+		this.errorCode = errorCode;
+	}
 	/**
 	 * To retrieve Error code of the exception.
 	 *
@@ -27,5 +37,6 @@ public class GenericArtifactException extends Exception {
 	public String getErrorCode() {
 		return this.errorCode;
 	}
+
 
 }

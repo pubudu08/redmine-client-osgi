@@ -44,9 +44,9 @@ public class PMAdminService implements ProjectManagementArtifact {
 	 * @return <code>true</code> if project created successfully
 	 */
 	@Override
-	public void createPMSProject(String redmineHost,String username,
-	                             String password,String projectName)
-	  throws GenericArtifactException,RedmineException {
+	public void createPMSProject(String redmineHost, String username,
+	                             String password, String projectName)
+	  throws GenericArtifactException, RedmineException {
 
 		Project project;
 		redmineManager = new RedmineManager(redmineHost, username, password);
@@ -73,9 +73,9 @@ public class PMAdminService implements ProjectManagementArtifact {
 				LOGGER.debug("Redmine project successfully created by : " +
 				             redmineManager.getCurrentUser() + ", timestamp " + new Date().getTime());
 			}
-		} catch (RedmineException e) {
-			LOGGER.error("Unable to connect Redmine servers", e);
-			throw new RedmineException();
+		} catch (RedmineException exception) {
+			throw new GenericArtifactException("Unable to connect Redmine servers",
+			  exception, "Redmine_Server_Error");
 		} finally {
 			if (redmineManager != null) {
 				redmineManager = null;
@@ -92,16 +92,16 @@ public class PMAdminService implements ProjectManagementArtifact {
 	 * @param projectKey
 	 * @return Redmine Project
 	 */
-	public Project getProjectById(String redmineHost,String username,
-	                              String password,String projectKey)
-	  throws RedmineException {
+	public Project getProjectById(String redmineHost, String username,
+	                              String password, String projectKey)
+	  throws RedmineException, GenericArtifactException {
 		redmineManager = new RedmineManager(redmineHost, username, password);
 		Project project;
 		try {
 			project = redmineManager.getProjectByKey(projectKey);
-		} catch (RedmineException e) {
-			LOGGER.error("Unable to connect Redmine servers", e);
-			throw new RedmineException();
+		} catch (RedmineException exception) {
+			throw new GenericArtifactException("Unable to connect Redmine servers",
+			  exception, "Redmine_Server_Error");
 		}
 		return project;
 	}
@@ -117,14 +117,14 @@ public class PMAdminService implements ProjectManagementArtifact {
 	public User getCurrentUser(String redmineHost,
 	                           String username,
 	                           String password)
-	  throws RedmineException {
+	  throws RedmineException, GenericArtifactException {
 		redmineManager = new RedmineManager(redmineHost, username, password);
 		User user;
 		try {
 			user = redmineManager.getCurrentUser();
-		} catch (RedmineException e) {
-			LOGGER.error("Unable to connect Redmine servers", e);
-			throw new RedmineException();
+		} catch (RedmineException exception) {
+			throw new GenericArtifactException("Unable to connect Redmine servers",
+			  exception, "Redmine_Server_Error");
 		}
 		return user;
 	}
@@ -142,20 +142,18 @@ public class PMAdminService implements ProjectManagementArtifact {
 	                                        String username,
 	                                        String password,
 	                                        String projectKey)
-	  throws RedmineException {
+	  throws RedmineException, GenericArtifactException {
 		redmineManager = new RedmineManager(redmineHost, username, password);
 		List<Version> projectVersions;
 
 		try {
 			projectVersions = redmineManager.getVersions(Integer.parseInt(projectKey));
-		} catch (RedmineException e) {
-			LOGGER.error("Unable to connect Redmine servers", e);
-			throw new RedmineException();
+		} catch (RedmineException exception) {
+			throw new GenericArtifactException("Unable to connect Redmine servers", exception,
+			  "Redmine_Server_Error");
 		}
 		return projectVersions;
 
 
 	}
-
-
 }
