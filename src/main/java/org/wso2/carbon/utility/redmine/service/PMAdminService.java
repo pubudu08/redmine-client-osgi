@@ -8,7 +8,8 @@ import com.taskadapter.redmineapi.bean.Version;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.utility.projectmanagement.ProjectManagementArtifact;
-import org.wso2.carbon.utility.redmine.exception.GenericArtifactException;
+import org.wso2.carbon.utility.projectmanagement.exception.GenericArtifactException;
+
 
 import java.util.Date;
 import java.util.List;
@@ -45,8 +46,7 @@ public class PMAdminService implements ProjectManagementArtifact {
 	 */
 	@Override
 	public void createPMSProject(String redmineHost, String username,
-	                             String password, String projectName)
-	  throws GenericArtifactException, RedmineException {
+	                             String password, String projectName) throws GenericArtifactException {
 
 		Project project;
 		redmineManager = new RedmineManager(redmineHost, username, password);
@@ -94,7 +94,7 @@ public class PMAdminService implements ProjectManagementArtifact {
 	 */
 	public Project getProjectById(String redmineHost, String username,
 	                              String password, String projectKey)
-	  throws RedmineException, GenericArtifactException {
+	  throws GenericArtifactException {
 		redmineManager = new RedmineManager(redmineHost, username, password);
 		Project project;
 		try {
@@ -117,7 +117,7 @@ public class PMAdminService implements ProjectManagementArtifact {
 	public User getCurrentUser(String redmineHost,
 	                           String username,
 	                           String password)
-	  throws RedmineException, GenericArtifactException {
+	  throws GenericArtifactException {
 		redmineManager = new RedmineManager(redmineHost, username, password);
 		User user;
 		try {
@@ -142,7 +142,7 @@ public class PMAdminService implements ProjectManagementArtifact {
 	                                        String username,
 	                                        String password,
 	                                        String projectKey)
-	  throws RedmineException, GenericArtifactException {
+	  throws GenericArtifactException {
 		redmineManager = new RedmineManager(redmineHost, username, password);
 		List<Version> projectVersions;
 
